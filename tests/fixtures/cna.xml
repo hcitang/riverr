@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>CNA - Top Stories</title>
+    <link>https://www.channelnewsasia.com/</link>
+    <description>Latest news from CNA</description>
+    <item>
+      <title>Singapore PM announces new housing scheme</title>
+      <link>https://www.channelnewsasia.com/singapore/housing-scheme-1000001</link>
+      <pubDate>Mon, 11 May 2026 09:30:00 +0800</pubDate>
+      <guid>https://www.channelnewsasia.com/singapore/housing-scheme-1000001</guid>
+      <description>The new scheme aims to help first-time homebuyers under 35.</description>
+    </item>
+    <item>
+      <title>Heatwave grips Southeast Asia</title>
+      <link>https://www.channelnewsasia.com/asia/heatwave-1000002</link>
+      <pubDate>Mon, 11 May 2026 07:00:00 +0800</pubDate>
+      <guid>https://www.channelnewsasia.com/asia/heatwave-1000002</guid>
+      <description>Temperatures across the region have surpassed 38 degrees Celsius.</description>
+    </item>
+    <item>
+      <title>SMU launches new computing degree</title>
+      <link>https://www.channelnewsasia.com/singapore/smu-degree-1000003</link>
+      <pubDate>Sun, 10 May 2026 18:00:00 +0800</pubDate>
+      <guid>https://www.channelnewsasia.com/singapore/smu-degree-1000003</guid>
+      <description>The new BSc in AI Systems launches in August.</description>
+    </item>
+  </channel>
+</rss>

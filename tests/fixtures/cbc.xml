@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>CBC | Top Stories News</title>
+    <link>https://www.cbc.ca/news/topstories</link>
+    <description>FOR PERSONAL USE ONLY</description>
+    <item>
+      <title>Federal budget tabled in House of Commons</title>
+      <link>https://www.cbc.ca/news/politics/budget-2026-1.0000001</link>
+      <pubDate>Mon, 11 May 2026 15:30:00 EDT</pubDate>
+      <guid isPermaLink="false">cbc-1.0000001</guid>
+      <description>The federal government tabled its 2026 budget on Monday afternoon, with new spending on housing and clean energy.</description>
+    </item>
+    <item>
+      <title>Storm system moves across the Maritimes</title>
+      <link>https://www.cbc.ca/news/canada/maritimes/storm-1.0000002</link>
+      <pubDate>Mon, 11 May 2026 14:00:00 EDT</pubDate>
+      <guid isPermaLink="false">cbc-1.0000002</guid>
+      <description>A heavy storm system is sweeping through the Maritimes, bringing high winds and power outages to thousands.</description>
+    </item>
+    <item>
+      <title>Oilers advance to second round of NHL playoffs</title>
+      <link>https://www.cbc.ca/sports/hockey/nhl/oilers-1.0000003</link>
+      <pubDate>Sun, 10 May 2026 23:45:00 EDT</pubDate>
+      <guid isPermaLink="false">cbc-1.0000003</guid>
+      <description>The Edmonton Oilers defeated the Kings 4-2 in Game 6 to advance.</description>
+    </item>
+  </channel>
+</rss>

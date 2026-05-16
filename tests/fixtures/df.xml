@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Daring Fireball</title>
+  <link rel="alternate" type="text/html" href="https://daringfireball.net/"/>
+  <id>https://daringfireball.net/feeds/main</id>
+  <updated>2026-05-11T20:00:00Z</updated>
+  <entry>
+    <title>★ The State of the Mac in 2026</title>
+    <link rel="alternate" type="text/html" href="https://daringfireball.net/2026/05/state-of-the-mac"/>
+    <id>tag:daringfireball.net,2026:/linked//6.50001</id>
+    <updated>2026-05-11T20:00:00Z</updated>
+    <author><name>John Gruber</name></author>
+    <content type="html">&lt;p&gt;A long-form piece on where the Mac stands today, covering Apple silicon performance, app developer mood, and macOS reliability concerns. &lt;a href="https://example.com/mac-perf"&gt;See the benchmarks here&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;The Mac platform continues to mature, and there is plenty to say.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Apple Q2 Results</title>
+    <link rel="alternate" type="text/html" href="https://www.apple.com/newsroom/q2-2026"/>
+    <id>tag:daringfireball.net,2026:/linked//6.50002</id>
+    <updated>2026-05-10T15:00:00Z</updated>
+    <author><name>John Gruber</name></author>
+    <content type="html">&lt;p&gt;&lt;a href="https://www.apple.com/newsroom/q2-2026"&gt;Apple Newsroom&lt;/a&gt;:&lt;/p&gt;&lt;blockquote&gt;Apple today announced financial results for its fiscal 2026 second quarter.&lt;/blockquote&gt;</content>
+  </entry>
+  <entry>
+    <title>★ On Vision Pro Pricing</title>
+    <link rel="alternate" type="text/html" href="https://daringfireball.net/2026/05/vision-pro-pricing"/>
+    <id>tag:daringfireball.net,2026:/linked//6.50003</id>
+    <updated>2026-05-09T22:00:00Z</updated>
+    <author><name>John Gruber</name></author>
+    <content type="html">&lt;p&gt;Pricing remains a sore spot, but the long view suggests a different story. The platform is still finding itself.&lt;/p&gt;</content>
+  </entry>
+</feed>

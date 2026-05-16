@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html><head><title>A small Rust port scanner</title></head>
+<body>
+<article>
+<h1>A small Rust port scanner</h1>
+<p>I built a small TCP port scanner in Rust over a weekend, mostly to learn more about async I/O and Tokio's task model. The result is a binary that scans 65,535 ports on a local host in under three seconds on my laptop, and offers a few simple output formats including JSON and plain text. It is not intended to replace nmap, but it is fast enough for my own daily use and the code is short enough to read in one sitting.</p>
+<h2>Why bother?</h2>
+<p>I wanted a project where I could measure performance changes I made to the code in a tight loop and where the bottleneck would shift between several different layers as I optimised the program. Port scanning is a good fit for this: the bottleneck might be the kernel's connect queue, the file descriptor limit, or the way you schedule tasks across an executor.</p>
+<h2>Design</h2>
+<p>The scanner uses a fixed pool of tasks fed by an unbounded channel. Each task pulls a port off the channel, attempts a TCP connect with a short timeout, and reports the result back through a results channel. The main task collects results and prints them. This is roughly the simplest possible architecture and it turned out to be fast enough for my needs.</p>
+<h2>Performance</h2>
+<p>On my M2 MacBook Air, scanning all 65,535 ports on localhost takes 2.4 seconds with a 100ms connect timeout and 1024 concurrent tasks. Beyond that level of concurrency, the kernel starts to refuse connections, so I capped it.</p>
+<h2>Lessons</h2>
+<p>The most surprising thing I learned was how much variance there was between runs, and how much it mattered whether the scanned host was sending RST packets quickly or silently dropping. The numbers I report above are medians over twenty runs.</p>
+</article>
+</body></html>

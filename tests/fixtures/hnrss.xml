@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Hacker News: Front Page</title>
+    <link>https://news.ycombinator.com/</link>
+    <description>Hacker News RSS</description>
+    <item>
+      <title>Show HN: A small Rust port scanner</title>
+      <link>https://example.com/rust-port-scanner</link>
+      <comments>https://news.ycombinator.com/item?id=10000001</comments>
+      <pubDate>Mon, 11 May 2026 14:00:00 +0000</pubDate>
+      <author>alice@example.com (alice)</author>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10000001</guid>
+      <description>&lt;p&gt;Article URL: &lt;a href="https://example.com/rust-port-scanner"&gt;https://example.com/rust-port-scanner&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10000001"&gt;https://news.ycombinator.com/item?id=10000001&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Points: 200&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Why Postgres is great</title>
+      <link>https://example.com/postgres</link>
+      <comments>https://news.ycombinator.com/item?id=10000002</comments>
+      <pubDate>Mon, 11 May 2026 12:00:00 +0000</pubDate>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10000002</guid>
+      <description>&lt;p&gt;Article URL: &lt;a href="https://example.com/postgres"&gt;https://example.com/postgres&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Ask HN: How do you take notes?</title>
+      <link>https://news.ycombinator.com/item?id=10000003</link>
+      <comments>https://news.ycombinator.com/item?id=10000003</comments>
+      <pubDate>Mon, 11 May 2026 11:00:00 +0000</pubDate>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10000003</guid>
+      <description>&lt;p&gt;I'm curious how folks here organize their notes day-to-day.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "riverr"
+version = "0.1.0"
+description = "River RSS Reader — a terminal RSS reader for people who want to read articles, not headlines."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+authors = [{ name = "Tony Tang" }]
+keywords = ["rss", "reader", "terminal", "tui", "textual"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Communications",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Terminals",
+]
+dependencies = [
+    "textual>=0.79",
+    "feedparser>=6.0",
+    "httpx>=0.27",
+    "trafilatura>=1.12",
+    "Pillow>=10.0",
+    "readability-lxml>=0.8",
+    "markdown-it-py>=3.0",
+    "markdownify>=0.13",
+    "cloudscraper>=1.2",
+    "tomli_w>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+]
+
+[project.scripts]
+riverr = "riverr.cli:main"
+rr     = "riverr.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/hcitang/riverr"
+Issues   = "https://github.com/hcitang/riverr/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["riverr*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

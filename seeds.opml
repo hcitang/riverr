@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<opml version="2.0">
+  <head>
+    <title>riverr seed subscriptions</title>
+  </head>
+  <body>
+    <outline type="rss" text="Hacker News" title="Hacker News" xmlUrl="https://hnrss.org/frontpage" htmlUrl="https://news.ycombinator.com/"/>
+    <outline type="rss" text="CBC Top Stories" title="CBC Top Stories" xmlUrl="https://www.cbc.ca/webfeed/rss/rss-topstories" htmlUrl="https://www.cbc.ca/"/>
+    <outline type="rss" text="CNA Top Stories" title="CNA Top Stories" xmlUrl="https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml" htmlUrl="https://www.channelnewsasia.com/"/>
+    <outline type="rss" text="Daring Fireball" title="Daring Fireball" xmlUrl="https://daringfireball.net/feeds/main" htmlUrl="https://daringfireball.net/"/>
+  </body>
+</opml>
