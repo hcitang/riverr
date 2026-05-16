@@ -102,13 +102,17 @@ class RiverRow(_Row):
         )
         max_title = max(1, width - fixed)
         title = _truncate_title(it.title, max_title)
+        # Pad the title to max_title so the age column always lands at the
+        # same right-aligned position across every row, regardless of title
+        # length. Without this, short titles let age float left.
+        title_padded = title.ljust(max_title)
         age_pad = age.rjust(max(len(age), AGE_WIDTH))
         star_part = f"[bold yellow]{star}[/]" if star else ""
         return (
             f"{marker}"
             f"[{dot_style}]{dot}[/] "
             f"[black on {color}] {tag} [/] "
-            f"{star_part}[{title_style}]{title}[/]  [dim]{age_pad}[/]"
+            f"{star_part}[{title_style}]{title_padded}[/]  [dim]{age_pad}[/]"
         )
 
     def refresh_label(self) -> None:

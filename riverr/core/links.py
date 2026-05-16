@@ -52,8 +52,12 @@ def copy_url(url: str) -> bool:
     try:
         b64 = base64.b64encode(url.encode("utf-8")).decode("ascii")
         seq = f"\x1b]52;c;{b64}\x07"
-        sys.stdout.write(seq)
-        sys.stdout.flush()
+        # Write to the real terminal fd. sys.stdout is owned by the Textual
+        # driver while the TUI is running and the escape would otherwise be
+        # captured/discarded (same root cause as the KittyImage stdout fix).
+        out = sys.__stdout__ if sys.__stdout__ is not None else sys.stdout
+        out.write(seq)
+        out.flush()
         return True
     except Exception:
         return False

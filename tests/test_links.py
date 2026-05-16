@@ -25,11 +25,13 @@ def test_truncate_middle_tight_width():
     assert "…" in out
 
 
-def test_copy_url_writes_osc52(capsys, monkeypatch):
+def test_copy_url_writes_osc52(capfd, monkeypatch):
+    # Use capfd (fd-level capture) instead of capsys, because copy_url writes
+    # to sys.__stdout__ to bypass Textual's stdout interception.
     monkeypatch.delenv("RIVERR_CLIPBOARD", raising=False)
     url = "https://example.com/x?y=1"
     assert copy_url(url) is True
-    out = capsys.readouterr().out
+    out = capfd.readouterr().out
     assert out.startswith("\x1b]52;c;")
     assert out.endswith("\x07")
     payload = out[len("\x1b]52;c;"):-1]
