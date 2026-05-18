@@ -123,6 +123,33 @@ class ItemsMixin:
         self.conn.commit()
         return cur.rowcount
 
+    def prune_feed(self, feed_id: int, max_items: int) -> int:
+        """Keep the most recent `max_items` non-starred items in a feed;
+        delete the rest. Starred items are exempt from the cap (they are
+        never deleted and don't count toward it). `max_items <= 0` disables
+        pruning. Returns the number of rows deleted.
+        """
+        if max_items <= 0:
+            return 0
+        rows = self.conn.execute(
+            """SELECT id FROM items
+               WHERE feed_id=? AND starred=0
+               ORDER BY COALESCE(published_at, fetched_at) DESC, id DESC""",
+            (feed_id,),
+        ).fetchall()
+        if len(rows) <= max_items:
+            return 0
+        excess = [r["id"] for r in rows[max_items:]]
+        ph = ",".join("?" * len(excess))
+        self.conn.execute(
+            f"DELETE FROM read_state WHERE item_id IN ({ph})", excess
+        )
+        cur = self.conn.execute(
+            f"DELETE FROM items WHERE id IN ({ph})", excess
+        )
+        self.conn.commit()
+        return cur.rowcount
+
     def items_for_feed(self, feed_id: int) -> list[Item]:
         rows = self.conn.execute(
             """SELECT items.*, COALESCE(read_state.read, 0) AS read

@@ -39,6 +39,7 @@ from riverr.core import opml as opml_mod
 from riverr.core.app_base import RiverrApp
 from riverr.core.config import get_paths
 from riverr.core.extract import is_stub
+from riverr.core.retention import human_size
 from riverr.core.search import filter_items, fts_search
 from riverr.core.storage import Feed, Item, Storage
 
@@ -240,8 +241,10 @@ class V7App(RiverrApp):
         parts = ["river+", label]
         if self.filter_query:
             parts.append(f"/{self.filter_query}")
+        size_str = human_size(self.storage.db_size_bytes())
         self.breadcrumb_text = (
-            f"{' ▸ '.join(parts)}    [dim]{unread} unread · last refresh {last_str}[/]"
+            f"{' ▸ '.join(parts)}    "
+            f"[dim]{unread} unread · last refresh {last_str} · db {size_str}[/]"
         )
         self.status_text = (
             "Enter expand  </> view  s star  u unread  f pick feed  "

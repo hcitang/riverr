@@ -24,6 +24,7 @@ from .config import get_paths
 from .extract import ensure_extracted
 from .fetch import fetch_all
 from .links import copy_url, open_url
+from .retention import get_cap as _retention_cap, maybe_run_maintenance as _maybe_run_maintenance
 from .storage import Storage
 
 
@@ -188,6 +189,7 @@ class RiverrApp(App):
         self._flash(f"Refreshing… (0/{total})")
         new_total = 0
         results = await fetch_all(urls, transport=self.transport)
+        cap = _retention_cap()
         for f, res in zip(feeds, results):
             if res.ok:
                 before = self.storage.unread_count(f.id)
@@ -196,8 +198,11 @@ class RiverrApp(App):
                 self.storage.log_fetch(f.id, True, len(res.items))
                 after = self.storage.unread_count(f.id)
                 new_total += max(0, after - before)
+                if cap > 0:
+                    self.storage.prune_feed(f.id, cap)
             else:
                 self.storage.log_fetch(f.id, False, 0, res.error)
+        _maybe_run_maintenance(self.storage)
         self._after_refresh()
         self._flash(f"Refreshed: +{new_total} new")
         self.set_timer(3.0, lambda: self._flash(""))

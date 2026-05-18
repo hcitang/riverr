@@ -162,3 +162,36 @@ class StorageBase:
 
     def close(self) -> None:
         self.conn.close()
+
+    # --- maintenance / observability ---
+
+    def db_size_bytes(self) -> int:
+        """Total on-disk size of the SQLite database file plus its WAL
+        and shared-memory sidecars (so the number doesn't appear to
+        shrink/grow as WAL checkpoints fire)."""
+        total = 0
+        for suffix in ("", "-wal", "-shm"):
+            try:
+                total += Path(self.db_path + suffix).stat().st_size
+            except OSError:
+                pass
+        return total
+
+    def optimize_fts(self) -> None:
+        try:
+            self.conn.execute("INSERT INTO items_fts(items_fts) VALUES('optimize')")
+            self.conn.commit()
+        except sqlite3.DatabaseError:
+            pass
+
+    def vacuum(self) -> None:
+        """Reclaim pages freed by deletes. No-op on error (e.g. open txn)."""
+        try:
+            self.conn.commit()
+            self.conn.isolation_level = None
+            try:
+                self.conn.execute("VACUUM")
+            finally:
+                self.conn.isolation_level = ""
+        except sqlite3.DatabaseError:
+            pass

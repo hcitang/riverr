@@ -9,6 +9,11 @@ from riverr.core import opml as opml_mod
 from riverr.core.config import get_paths
 from riverr.core.feeds import add_by_url
 from riverr.core.fetch import fetch_all
+from riverr.core.retention import (
+    get_cap as _retention_cap,
+    human_size,
+    maybe_run_maintenance,
+)
 from riverr.core.storage import Storage
 
 
@@ -215,12 +220,45 @@ def cmd_smoke(args: argparse.Namespace) -> int:
         transport = make_transport()
     results = asyncio.run(fetch_all(urls, transport=transport))
     total_new = 0
+    cap = _retention_cap()
     for f, res in zip(feeds, results):
         n = storage.upsert_items(f.id, res.items) if res.ok else 0
         total_new += n
+        if res.ok and cap > 0:
+            storage.prune_feed(f.id, cap)
         status = "OK" if res.ok else f"ERR ({res.error})"
         print(f"  {f.name:25s}  {status}  +{n} new  ({len(res.items)} items)")
+    maybe_run_maintenance(storage)
     print(f"Total new items: {total_new}")
+    return 0
+
+
+def cmd_status(args: argparse.Namespace) -> int:
+    """Show db size, feed/item counts, and per-feed item counts."""
+    storage = _bootstrap_storage()
+    paths = get_paths()
+    size = storage.db_size_bytes()
+    feeds = storage.list_feeds()
+    total_items = storage.conn.execute(
+        "SELECT COUNT(*) AS c FROM items"
+    ).fetchone()["c"]
+    starred = storage.conn.execute(
+        "SELECT COUNT(*) AS c FROM items WHERE starred=1"
+    ).fetchone()["c"]
+    cap = _retention_cap()
+    cap_str = "unlimited" if cap <= 0 else str(cap)
+    print(f"db:    {paths.db}")
+    print(f"size:  {human_size(size)}  ({size:,} bytes)")
+    print(f"feeds: {len(feeds)}    items: {total_items}    starred: {starred}")
+    print(f"cap:   retention.max_items_per_feed = {cap_str}")
+    if feeds:
+        print()
+        rows = storage.conn.execute(
+            """SELECT feed_id, COUNT(*) AS n FROM items GROUP BY feed_id"""
+        ).fetchall()
+        counts = {r["feed_id"]: r["n"] for r in rows}
+        for f in feeds:
+            print(f"  {f.id:3d}  {f.name:30s}  {counts.get(f.id, 0):4d}")
     return 0
 
 
@@ -277,6 +315,9 @@ def main(argv: list[str] | None = None) -> int:
 
     p = sub.add_parser("smoke", help="non-UI fetch test")
     p.set_defaults(func=cmd_smoke)
+
+    p = sub.add_parser("status", help="show db size, feed counts, retention cap")
+    p.set_defaults(func=cmd_status)
 
     p = sub.add_parser(
         "items", help="manage stored items (reset, etc.)"
